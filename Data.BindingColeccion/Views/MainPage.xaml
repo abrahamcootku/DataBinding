@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views ="clr-namespace:DataBinding.Coleccion.Views"
              xmlns:models="clr-namespace:DataBindingColeccion.Models"
+             x:DataType="views:MainPage"
              x:Class="DataBinding.Coleccion.Views.MainPage"
              Title="MainPage"
              BackgroundColor="LightGray">
@@ -36,12 +38,13 @@
         </Grid>
         <CollectionView
             Grid.Row="1"
-            BackgroundColor="Beige"
+            BackgroundColor="LightGreen"
+            ItemsSource="{Binding Origenes}"
             SelectionMode="Single"
+            SelectedItem="{Binding OrigenSeleccionado}"
             EmptyView="Aún no se registran orígenes de paquetes"
-            SelectionChanged="OrigenesListView_SelectionChanged"
-            x:Name="OrigenesListView">
-            <!--<CollectionView.ItemTemplate>
+            SelectionChanged="OrigenesListView_SelectionChanged">
+            <CollectionView.ItemTemplate>
                 <DataTemplate
                     x:DataType="{x:Type models:OrigenDePaquete}">
                     <Border
@@ -52,20 +55,20 @@
                             ColumnDefinitions="auto,auto">
                             <CheckBox
                                 Grid.RowSpan="2"
-                              IsChecked="False"/>
+                                IsChecked="{Binding EstaHabilitado}"/>
                             <Label
                                 Grid.Column="1"
-                                Text="Empty"/>
+                                Text="{Binding Nombre}"/>
                             <Label
                                 Grid.Row="1"
                                 Grid.Column="1"
-                                Text="Empty2"/>
+                                Text="{Binding Origen}"/>
                         </Grid>
 
                     </Border>
                 </DataTemplate> 
                 
-            </CollectionView.ItemTemplate>-->
+            </CollectionView.ItemTemplate>
         </CollectionView>
         <Grid
                 Grid.Row="2"
@@ -79,15 +82,15 @@
                 TextColor="Black"/>
             <Entry
                 Grid.Column="1"
-                x:Name="NombreEntry"/>
+                Text="{Binding NombreDelOrigen}"/>
             <Label
                 Grid.Row="1"
                 Text="Origen:"
                 TextColor="Black"/>
             <Entry
                 Grid.Row="1"
-                Grid.Column="1"
-                x:Name="OrigenEntry"/>
+                Text="{Binding RutaDelOrigen}"
+                Grid.Column="1"/>
             <Button
                 Grid.Row="1"
                 Grid.Column="2"
